@@ -105,7 +105,7 @@ app.post("/api/users/:_id/exercises", async (req,res)=>{
 
   user.description = description;
   user.duration = duration;
-  user.date = dateObj;
+  user.date = dateObj.toDateString();
 
   res.json(user);
 })
