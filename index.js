@@ -79,7 +79,7 @@ app.get('/', (req, res) => {
 
 app.get("/api/users/", async (req,res)=>{
 
-  const result = await User.findAll();
+  const result = await User.find().exec();
   
   res.json(result);
 })
