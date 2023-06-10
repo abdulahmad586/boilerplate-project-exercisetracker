@@ -92,6 +92,18 @@ app.post("/api/users/", async (req,res)=>{
   res.json(result);
 })
 
+app.post("/api/users/:_id/exercises", async (req,res)=>{
+  const {_id} = req.params;
+  const { description, duration, date=Date.now() } = req.body;
+  const user= await User.findOneById(_id);
+
+  const dateObj = new Date(date);
+
+  const exercise = new Exercise({username:user.username, description, duration, date:dateObj});
+
+  const result = await exercise.save();
+  res.json(result);
+})
 
 
 const listener = app.listen(process.env.PORT || 3000, () => {
