@@ -101,7 +101,12 @@ app.post("/api/users/:_id/exercises", async (req,res)=>{
 
   const exercise = new Exercise({username:user.username, description, duration, date:dateObj});
 
-  const result = await exercise.save();
+  const exResult = await exercise.save();
+
+  user.description = description;
+  user.duration = duration;
+  user.date = dateObj;
+
   res.json(result);
 })
 
