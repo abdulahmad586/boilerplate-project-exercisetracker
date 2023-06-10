@@ -76,6 +76,14 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
+
+app.get("/api/users/", async (req,res)=>{
+
+  const result = await User.findAll();
+  
+  res.json(result);
+})
+
 app.post("/api/users/", async (req,res)=>{
 
   const { username } = req.body;
