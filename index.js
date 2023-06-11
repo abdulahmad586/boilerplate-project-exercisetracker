@@ -110,9 +110,21 @@ app.post("/api/users/:_id/exercises", async (req,res)=>{
 
 app.get("/api/users/:_id/logs", async (req,res)=>{
   const {_id} = req.params;
+  const {from, to, limit} = req.query;
+
   const user= await User.findOne({_id});
 
-  const exercises = await Exercise.find({username:user.username}).exec()
+  const query = { username: user.username };
+
+  if (from && to) {
+    query.date = { $gte: new Date(from), $lte: new Date(to) };
+  } else if (from) {
+    query.date = { $gte: new Date(from) };
+  } else if (to) {
+    query.date = { $lte: new Date(to) };
+  }
+
+  const exercises = await Exercise.find(query).limit(parseInt(limit)).exec()
   const result = {
     username: user.username,
     count: exercises.length,
