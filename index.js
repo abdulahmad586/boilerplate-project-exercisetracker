@@ -95,6 +95,7 @@ app.post("/api/users/", async (req,res)=>{
 app.post("/api/users/:_id/exercises", async (req,res)=>{
   const {_id} = req.params;
   const { description, duration, date=Date.now() } = req.body;
+  
   const user= await User.findOne({_id});
 
   const dateObj = new Date(date);
