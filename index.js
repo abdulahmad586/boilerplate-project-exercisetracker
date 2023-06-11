@@ -118,7 +118,7 @@ app.get("/api/users/:_id/logs", async (req,res)=>{
     count: exercises.length,
     _id: user._id,
     log:exercises.map(e=>{
-      const {description, duration, date}
+      const {description, duration, date} = e;
       return { description, duration, date:date.toDateString() }
     })
   }
