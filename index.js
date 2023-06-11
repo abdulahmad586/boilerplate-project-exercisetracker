@@ -104,7 +104,7 @@ app.post("/api/users/:_id/exercises", async (req,res)=>{
 
   const exResult = await exercise.save();
 
-  const result= {...user, description, duration, date:dateObj.toDateString()};
+  const result= {username:user.username, description, duration, date:dateObj.toDateString(), _id: user.id};
   res.json(result);
 })
 
